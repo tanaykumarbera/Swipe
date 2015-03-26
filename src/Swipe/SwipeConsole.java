@@ -29,7 +29,7 @@ public class SwipeConsole extends JFrame{
 		
 		// All set! Start initial Operation :: Start the last attached camera
 		try{
-			backPanel.startCam();
+			//backPanel.startCam();
 		}catch(Exception e){
 			SwipeConsole.pop("Error: " + e.getMessage());
 			e.printStackTrace();

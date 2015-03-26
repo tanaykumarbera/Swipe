@@ -71,6 +71,10 @@ public class SwipeControlPanel extends JPanel implements ActionListener{
 			    }
 			});
 			
+			Dimension sp_size = new Dimension(480, 120);
+			SliderPanel sliderPanel = new SliderPanel(sp_size);
+			this.add(sliderPanel);
+			sliderPanel.setBounds(340 + insets.left, 10 + insets.top, sp_size.width, sp_size.height);
 			
 		}else{
 			/* No Camera found	*/
