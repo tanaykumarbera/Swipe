@@ -1,6 +1,7 @@
 package slider;
 
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JSlider;
 
@@ -28,7 +29,7 @@ public class RangeSlider extends JSlider {
      * Constructs a RangeSlider with the specified default minimum and maximum 
      * values.
      */
-    public RangeSlider(int min, int max) {
+    public RangeSlider(int min, int max){
         super(min, max);
         initSlider();
     }
@@ -40,20 +41,7 @@ public class RangeSlider extends JSlider {
         setOrientation(HORIZONTAL);
     }
 
-    /**
-     * Overrides the superclass method to install the UI delegate to draw two
-     * thumbs.
-     */
-    
-    public void updateUI() {
-//        setUI(new RangeSliderUI(this));
-    	setUI(new RangeSliderUI(this, Color.BLUE));
-        // Update UI for slider labels.  This must be called after updating the
-        // UI of the slider.  Refer to JSlider.updateUI().
-        updateLabelUIs();
-    }
-
-    /**
+        /**
      * Returns the lower value in the range.
      */
     

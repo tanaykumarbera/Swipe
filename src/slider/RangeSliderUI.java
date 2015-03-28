@@ -181,7 +181,6 @@ class RangeSliderUI extends BasicSliderUI {
     
     public void paintTrack(Graphics g) {
         // Draw track.
-    	g.setColor(Color.RED);
         super.paintTrack(g);
         
         Rectangle trackBounds = trackRect;
