@@ -42,12 +42,10 @@ class RangeSliderUI extends BasicSliderUI {
      */
     public RangeSliderUI(RangeSlider b) {
         super(b);
-        System.out.println("\n-");
     }
     
     public RangeSliderUI(RangeSlider b, Color rcol) {
         super(b);
-        System.out.println("\n=");
         this.rangeColor = rcol;
     }
     

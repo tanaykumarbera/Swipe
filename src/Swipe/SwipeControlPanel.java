@@ -1,13 +1,18 @@
 package Swipe;
 
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.DefaultComboBoxModel;
@@ -16,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-public class SwipeControlPanel extends JPanel implements ActionListener{
+public class SwipeControlPanel extends JPanel{
 	
 	static BufferedImage rawImage, binaryImage;
 	static JComboBox camMenu;
@@ -24,6 +29,9 @@ public class SwipeControlPanel extends JPanel implements ActionListener{
 	static Insets insets;
 	static Dimension frame_size;
 	static Font sFont;
+	SliderPanel sliderPanel;
+	
+	int DIFF = 10;
 	
 	public SwipeControlPanel(){
 		this.setLayout(null);
@@ -38,7 +46,42 @@ public class SwipeControlPanel extends JPanel implements ActionListener{
 		for(int j = 0; j < 240; j++)
 			for(int i = 0; i < 320; i++)
 				rawImage.setRGB(i, j, ImgBack);
-			
+		
+		/* Add a blank transparent layer of panel over the raw image to bind Mouse event */
+		JPanel transparentLayer = new JPanel();
+		transparentLayer.setPreferredSize(new Dimension(320, 240));
+		transparentLayer.setBackground(new Color(120, 120, 120, 0));
+		transparentLayer.addMouseListener(new MouseListener() {
+            public void mouseReleased(MouseEvent e) {
+            }
+            public void mousePressed(MouseEvent e) {
+            }
+            public void mouseExited(MouseEvent e){
+            }
+            public void mouseEntered(MouseEvent e) {
+            }
+            public void mouseClicked(MouseEvent e) {
+            	try {
+            		/* Get pointer location within the image, get color, set Range */
+					Robot mouse = new Robot();
+					//Point p = e.getPoint();
+					Point p = e.getLocationOnScreen();
+					Color c = mouse.getPixelColor(p.x, p.y);
+					int red = c.getRed(), green = c.getGreen(), blue = c.getBlue();
+					sliderPanel.Red.setValue(red - DIFF); sliderPanel.Red.setUpperValue(red + DIFF);
+					sliderPanel.Green.setValue(green - DIFF); sliderPanel.Green.setUpperValue(green + DIFF);
+					sliderPanel.Blue.setValue(blue - DIFF); sliderPanel.Blue.setUpperValue(blue + DIFF);
+					
+				} catch (Exception ex) {
+					SwipeConsole.pop(ex.getMessage());
+				}
+            }
+        });
+		this.add(transparentLayer);
+		transparentLayer.setBounds(10 + insets.left, 50 + insets.top, 320, 240);
+		
+		
+		
 		ImgBack = Color.DARK_GRAY.getRGB();
 		binaryImage = new BufferedImage(200, 150, BufferedImage.TYPE_BYTE_GRAY);
 		for(int j = 0; j < 150; j++)
@@ -72,7 +115,7 @@ public class SwipeControlPanel extends JPanel implements ActionListener{
 			});
 			
 			Dimension sp_size = new Dimension(480, 120);
-			SliderPanel sliderPanel = new SliderPanel(sp_size);
+			sliderPanel = new SliderPanel(sp_size);
 			this.add(sliderPanel);
 			sliderPanel.setBounds(340 + insets.left, 10 + insets.top, sp_size.width, sp_size.height);
 			
@@ -117,10 +160,5 @@ public class SwipeControlPanel extends JPanel implements ActionListener{
 
 	public void startCam(){
 		Processor.feedCam(camMenu.getSelectedIndex()); 
-	}
-
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
 	}
 }

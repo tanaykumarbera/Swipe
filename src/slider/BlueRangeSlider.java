@@ -21,7 +21,7 @@ public class BlueRangeSlider extends RangeSlider {
     public void updateUI() {
     	setUI(new RangeSliderUI(this, Color.BLUE));
         // Update UI for slider labels.  This must be called after updating the
-        // UI of the slider.  Refer to JSlider.updateUI().
+        // UI of the slider. Refer to JSlider.updateUI().
         updateLabelUIs();
     }
 }
