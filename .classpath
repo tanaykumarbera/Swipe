@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/webcam-capture-0.3.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/libs-for-webcam-capture/bridj-0.6.2.jar"/>

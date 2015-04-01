@@ -62,7 +62,7 @@ public class Swipe{
 					//Processor.performMouseAction(grid);
 					Processor.performAction(grid);
 				}catch(Exception e){
-					System.out.println("ERROR ENCOUNTERED :: " + e.toString());
+		  			System.out.println("ERROR ENCOUNTERED :: " + e.toString());
 					break;
 				}
 			}

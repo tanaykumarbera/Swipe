@@ -107,6 +107,39 @@ public class Processor{
 			    		(MIN_BLUE <= b) && (b <= MAX_BLUE) ? true : false;				    		
 			}
 		}
+		
+		int count0, count1;
+		for(int j = 2; j < resolution.height - 2; j++)
+			for(int i = 2; i < resolution.width - 2; i++){
+				count0 = 0; count1 = 0;
+				if(binaryImg[i-2][j-2]) count1++; else count0++;
+				if(binaryImg[i-2][j-1]) count1++; else count0++;
+				if(binaryImg[i-2][j]) count1++; else count0++;
+				if(binaryImg[i-2][j+1]) count1++; else count0++;
+				if(binaryImg[i-2][j+2]) count1++; else count0++;
+				if(binaryImg[i-1][j-2]) count1++; else count0++;
+				if(binaryImg[i-1][j-1]) count1++; else count0++;
+				if(binaryImg[i-1][j]) count1++; else count0++;
+				if(binaryImg[i-1][j+1]) count1++; else count0++;
+				if(binaryImg[i-1][j+2]) count1++; else count0++;
+				if(binaryImg[i][j-2]) count1++; else count0++;
+				if(binaryImg[i][j-1]) count1++; else count0++;
+				if(binaryImg[i][j]) count1++; else count0++;
+				if(binaryImg[i][j+1]) count1++; else count0++;
+				if(binaryImg[i][j+2]) count1++; else count0++;
+				if(binaryImg[i+1][j-2]) count1++; else count0++;
+				if(binaryImg[i+1][j-1]) count1++; else count0++;
+				if(binaryImg[i+1][j]) count1++; else count0++;
+				if(binaryImg[i+1][j+1]) count1++; else count0++;
+				if(binaryImg[i+1][j+2]) count1++; else count0++;
+				if(binaryImg[i+2][j-2]) count1++; else count0++;
+				if(binaryImg[i+2][j-1]) count1++; else count0++;
+				if(binaryImg[i+2][j]) count1++; else count0++;
+				if(binaryImg[i+2][j+1]) count1++; else count0++;
+				if(binaryImg[i+2][j+2]) count1++; else count0++;
+				
+				binaryImg[i][j] = (count1>count0) ? true : false;
+			}
 		return binaryImg;
 	}
 }

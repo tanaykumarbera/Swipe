@@ -23,6 +23,7 @@ public class SliderPanel extends JPanel{
 	JLabel redLabel, blueLabel, greenLabel, redRange, blueRange, greenRange;
 	Font bold10; 
 	Dimension colorLabel, colorSlider;
+	TitledBorder title;
 	
 	public SliderPanel(Dimension s) {
 		frame_size = s;
@@ -30,24 +31,24 @@ public class SliderPanel extends JPanel{
 		this.setBackground(Color.WHITE);
 		
 		bold10 = new Font("monospace", Font.BOLD, 10);
-		colorLabel = new Dimension(40, 25);
-		colorSlider = new Dimension(350, 25);
+		colorLabel = new Dimension(70, 25);
+		colorSlider = new Dimension(320, 25);
 		
-		TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(102, 102, 102, 255), 2), " FINE TUNING - Adjust the range sliders to control Segmentation Threshold ");
+		title = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(102, 102, 102, 255), 2), " FINE TUNING - Adjust the range sliders to control Segmentation Threshold ");
 		title.setTitleJustification(TitledBorder.LEFT);
 		title.setTitleColor(new Color(102, 102, 102, 255));
 		title.setTitleFont(bold10);
 		this.setBorder(title);
 		
-		redLabel = new JLabel("RED", JLabel.LEFT); redLabel.setFont(bold10); redLabel.setPreferredSize(colorLabel);
+		redLabel = new JLabel("[000] RED", JLabel.LEFT); redLabel.setFont(bold10); redLabel.setPreferredSize(colorLabel);
 		Red = new RedRangeSlider(0, 255, Processor.MIN_RED, Processor.MAX_RED, colorSlider);
 		redRange = new JLabel(); updateRED(Processor.MIN_RED, Processor.MAX_RED); redRange.setFont(bold10);
 		
-		greenLabel = new JLabel("GREEN"); greenLabel.setFont(bold10); greenLabel.setPreferredSize(colorLabel);
+		greenLabel = new JLabel("[000] GREEN"); greenLabel.setFont(bold10); greenLabel.setPreferredSize(colorLabel);
 		Green = new GreenRangeSlider(0, 255, Processor.MIN_GREEN, Processor.MAX_GREEN, colorSlider);
 		greenRange = new JLabel(); updateGREEN(Processor.MIN_GREEN, Processor.MAX_GREEN); greenRange.setFont(bold10);
 		
-		blueLabel = new JLabel("BLUE"); blueLabel.setFont(bold10); blueLabel.setPreferredSize(colorLabel);
+		blueLabel = new JLabel("[000] BLUE"); blueLabel.setFont(bold10); blueLabel.setPreferredSize(colorLabel);
 		Blue = new BlueRangeSlider(0, 255, Processor.MIN_BLUE, Processor.MAX_BLUE, colorSlider);
 		blueRange = new JLabel(); updateBLUE(Processor.MIN_BLUE, Processor.MAX_BLUE); blueRange.setFont(bold10);
 		

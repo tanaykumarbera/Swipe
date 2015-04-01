@@ -11,6 +11,7 @@ import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -24,14 +25,16 @@ import javax.swing.JScrollPane;
 public class SwipeControlPanel extends JPanel{
 	
 	static BufferedImage rawImage, binaryImage;
+	static JLabel rgbVal;
 	static JComboBox camMenu;
 	static JScrollPane camScrollPane;
 	static Insets insets;
 	static Dimension frame_size;
 	static Font sFont;
 	SliderPanel sliderPanel;
+	ControlPanel controlPanel;
 	
-	int DIFF = 10;
+	int DIFF = 50;
 	
 	public SwipeControlPanel(){
 		this.setLayout(null);
@@ -51,36 +54,65 @@ public class SwipeControlPanel extends JPanel{
 		JPanel transparentLayer = new JPanel();
 		transparentLayer.setPreferredSize(new Dimension(320, 240));
 		transparentLayer.setBackground(new Color(120, 120, 120, 0));
+		
+		rgbVal = new JLabel("RGB [250, 450, 200]", JLabel.CENTER);
+		rgbVal.setPreferredSize(new Dimension(130, 25));
+		rgbVal.setOpaque(true);
+		rgbVal.setBackground(Color.BLACK);
+		rgbVal.setFont(new Font("monospace", Font.PLAIN, 10));
+		rgbVal.setForeground(Color.WHITE);
+		rgbVal.setVisible(false);
+		
 		transparentLayer.addMouseListener(new MouseListener() {
             public void mouseReleased(MouseEvent e) {
             }
             public void mousePressed(MouseEvent e) {
             }
             public void mouseExited(MouseEvent e){
+            	rgbVal.setVisible(false);
+            	sliderPanel.title.setTitle(" FINE TUNING - Adjust the range sliders to control Segmentation Threshold ");
             }
             public void mouseEntered(MouseEvent e) {
+            	rgbVal.setVisible(true);
+            	sliderPanel.title.setTitle(" FINE TUNING - Click any object within the feed to auto adjust its threshold ");
             }
             public void mouseClicked(MouseEvent e) {
             	try {
             		/* Get pointer location within the image, get color, set Range */
-					Robot mouse = new Robot();
-					//Point p = e.getPoint();
-					Point p = e.getLocationOnScreen();
-					Color c = mouse.getPixelColor(p.x, p.y);
-					int red = c.getRed(), green = c.getGreen(), blue = c.getBlue();
-					sliderPanel.Red.setValue(red - DIFF); sliderPanel.Red.setUpperValue(red + DIFF);
-					sliderPanel.Green.setValue(green - DIFF); sliderPanel.Green.setUpperValue(green + DIFF);
-					sliderPanel.Blue.setValue(blue - DIFF); sliderPanel.Blue.setUpperValue(blue + DIFF);
+            		int pixData = rawImage.getRGB(e.getX(), e.getY());
+    				int r = (pixData >> 16) & 0xff;
+    			    int g = (pixData >> 8) & 0xff;
+    			    int b = (pixData) & 0xff;
+    			    
+					sliderPanel.Red.setValue(r - DIFF); sliderPanel.Red.setUpperValue(r + DIFF);
+					sliderPanel.Green.setValue(g - DIFF); sliderPanel.Green.setUpperValue(g + DIFF);
+					sliderPanel.Blue.setValue(b - DIFF); sliderPanel.Blue.setUpperValue(b + DIFF);
 					
+					sliderPanel.redLabel.setText("["+ sliderPanel.str_eq_len(r) +"] RED");
+					sliderPanel.greenLabel.setText("["+ sliderPanel.str_eq_len(g) +"] GREEN");
+					sliderPanel.blueLabel.setText("["+ sliderPanel.str_eq_len(b) +"] BLUE");
 				} catch (Exception ex) {
 					SwipeConsole.pop(ex.getMessage());
 				}
             }
         });
+		
+		transparentLayer.addMouseMotionListener(new MouseAdapter() {
+			public void mouseMoved(MouseEvent e){
+				int pixData = rawImage.getRGB(e.getX(), e.getY());
+				int r = (pixData >> 16) & 0xff;
+			    int g = (pixData >> 8) & 0xff;
+			    int b = (pixData) & 0xff;
+			    
+			    rgbVal.setText("RGB [" + sliderPanel.str_eq_len(r) + ", " + sliderPanel.str_eq_len(g) + ", " + sliderPanel.str_eq_len(b) + "]");
+			}
+		});
+		
 		this.add(transparentLayer);
 		transparentLayer.setBounds(10 + insets.left, 50 + insets.top, 320, 240);
 		
-		
+		this.add(rgbVal);
+		rgbVal.setBounds(190 + insets.left, 255 + insets.top, 130, 25);
 		
 		ImgBack = Color.DARK_GRAY.getRGB();
 		binaryImage = new BufferedImage(200, 150, BufferedImage.TYPE_BYTE_GRAY);
@@ -119,6 +151,11 @@ public class SwipeControlPanel extends JPanel{
 			this.add(sliderPanel);
 			sliderPanel.setBounds(340 + insets.left, 10 + insets.top, sp_size.width, sp_size.height);
 			
+			Dimension cp_size = new Dimension(270, 158);
+			controlPanel = new ControlPanel(cp_size);
+			this.add(controlPanel);
+			controlPanel.setBounds(550 + insets.left, 135 + insets.top, cp_size.width, cp_size.height);
+			
 		}else{
 			/* No Camera found	*/
 			
@@ -149,7 +186,6 @@ public class SwipeControlPanel extends JPanel{
 		}
 
 		this.setVisible(true);
-		System.out.println("SwipeControlPanel.SwipeControlPanel()");
 	}
 	
 	protected void paintComponent(Graphics g) {
