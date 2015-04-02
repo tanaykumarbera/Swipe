@@ -27,15 +27,15 @@ public class SwipeConsole extends JFrame{
 		ImageIcon icon = new ImageIcon(iconURL);
 		setIconImage(icon.getImage());
 		
-		setLocationRelativeTo(null);
 		pack();
+		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setVisible(true);
 		
 		// All set! Start initial Operation :: Start the last attached camera
 		try{
-			backPanel.startCam();
+		//	backPanel.startCam();
 		}catch(Exception e){
 			SwipeConsole.pop("Error: " + e.getMessage());
 			e.printStackTrace();

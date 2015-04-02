@@ -55,7 +55,7 @@ public class SwipeControlPanel extends JPanel{
 		transparentLayer.setPreferredSize(new Dimension(320, 240));
 		transparentLayer.setBackground(new Color(120, 120, 120, 0));
 		
-		rgbVal = new JLabel("RGB [250, 450, 200]", JLabel.CENTER);
+		rgbVal = new JLabel("RGB [120, 120, 120]", JLabel.CENTER);
 		rgbVal.setPreferredSize(new Dimension(130, 25));
 		rgbVal.setOpaque(true);
 		rgbVal.setBackground(Color.BLACK);
