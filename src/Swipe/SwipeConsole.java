@@ -7,10 +7,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.net.URL;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.plaf.ColorUIResource;
 
 public class SwipeConsole extends JFrame{
 	// Main 400, 300
@@ -33,9 +36,14 @@ public class SwipeConsole extends JFrame{
 		setResizable(false);
 		setVisible(true);
 		
+		// Set up look & feel for tooltip text
+		UIManager.put("ToolTip.background", new ColorUIResource(255, 255, 255)); // The color is #fff7c8.
+		Border border = BorderFactory.createLineBorder(new Color(76,79,83)); // The color is #4c4f53.
+		UIManager.put("ToolTip.border", border);
+		
 		// All set! Start initial Operation :: Start the last attached camera
 		try{
-		//	backPanel.startCam();
+			backPanel.startCam();
 		}catch(Exception e){
 			SwipeConsole.pop("Error: " + e.getMessage());
 			e.printStackTrace();
