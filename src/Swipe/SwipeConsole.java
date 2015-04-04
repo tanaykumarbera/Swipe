@@ -20,6 +20,7 @@ public class SwipeConsole extends JFrame{
 	// viewport 200, 150
 	
 	static SwipeControlPanel backPanel;
+	static BinaryViewport smallWindow;
 	SwipeConsole(){
 		backPanel = new SwipeControlPanel();
 		setContentPane(backPanel);
@@ -53,6 +54,8 @@ public class SwipeConsole extends JFrame{
 	protected void finalize() throws Throwable {
 		super.finalize();
 		Processor.camFeed = false;
+		Processor.viewportActive = false;
+		
 	}
 	
 	public static void pop(String s){
