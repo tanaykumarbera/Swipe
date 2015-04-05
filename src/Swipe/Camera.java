@@ -33,4 +33,8 @@ public class Camera{
 			return (Webcam) avaiableCams.get(index);
 		return null;
 	}
+	
+	public static Webcam getChoosenCam(){
+		return (Webcam) avaiableCams.get(SwipeControlPanel.camMenu.getSelectedIndex());
+	}
 }

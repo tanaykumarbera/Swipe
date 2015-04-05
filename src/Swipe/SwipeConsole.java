@@ -19,9 +19,11 @@ public class SwipeConsole extends JFrame{
 	// Main 400, 300
 	// viewport 200, 150
 	
+	static SwipeConsole handler;
 	static SwipeControlPanel backPanel;
 	static BinaryViewport smallWindow;
-	SwipeConsole(){
+	
+	public void initFrame(){
 		backPanel = new SwipeControlPanel();
 		setContentPane(backPanel);
 		
@@ -62,6 +64,7 @@ public class SwipeConsole extends JFrame{
 		System.out.println("Error: " + s);
 	}
 	public static void main(String[] args) {
-		new SwipeConsole();
+		handler = new SwipeConsole();
+		handler.initFrame();
 	}
 }

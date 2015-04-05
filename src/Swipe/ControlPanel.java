@@ -168,7 +168,11 @@ public class ControlPanel extends JPanel{
 		
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//
+				// Start Rolling Actions according to preferences
+				
+				SwipeConsole.handler.setVisible(false);
+				Processor.camFeed = false;
+				BinaryViewport.initOperation();
 			}          
 		});
 		
