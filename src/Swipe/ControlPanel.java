@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
@@ -17,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 public class ControlPanel extends JPanel{
@@ -169,9 +167,8 @@ public class ControlPanel extends JPanel{
 		start.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Start Rolling Actions according to preferences
-				
 				SwipeConsole.handler.setVisible(false);
-				Processor.camFeed = false;
+				ScreenFeeder.camFeed = false;				
 				BinaryViewport.initOperation();
 			}          
 		});

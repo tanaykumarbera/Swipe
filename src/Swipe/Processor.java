@@ -1,10 +1,6 @@
 package Swipe;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 import com.github.sarxos.webcam.Webcam;
@@ -51,53 +47,17 @@ public class Processor{
 
 	/* ------------------------------------- */
 	
-	public static void feedCam(int index){
-		
-		if(cam == null){
-			// Check to see if using any previous camera instance
-		}else{
-			// If so, close it before, choosing a new one.
-			if(cam.isOpen()){
-				cam.close();
+	public static BufferedImage getARGBImage(BufferedImage img){
+		int h = img.getHeight(), w = img.getWidth(), pixData;
+		BufferedImage newImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+		for(int i = 0; i < w; i++)
+			for(int j = 0; j < h; j++){
+				pixData = img.getRGB(i, j);
+			    newImg.setRGB(i, j, pixData);
 			}
-		}
-		
-		cam = (Webcam) Camera.avaiableCams.get(index);
-		cam.setViewSize(resRAW);
-		cam.open();
-		camFeed = true;
-		
-		double scaleX = (double)resBINARY.width/resRAW.width;
-	    double scaleY = (double)resBINARY.height/resRAW.height;
-	    
-	    try{
-	    	while(camFeed){
-				SwipeControlPanel.rawImage = cam.getImage(); // Click a frame
-				
-				boolean[][] binMatrix = Processor.getBinary(SwipeControlPanel.rawImage, resRAW); // Get binary  
-				BufferedImage binaryImg = new BufferedImage(resRAW.width, resRAW.height, BufferedImage.TYPE_BYTE_BINARY);
-				for(int j = 0; j < resRAW.height; j++)
-					for(int i = 0; i < resRAW.width; i++){
-						if(binMatrix[i][j])
-							binaryImg.setRGB(i, j, WHITE);
-						else
-							binaryImg.setRGB(i, j, BLACK);
-					}
-				
-				// Scale the obtained binary image to new resolution
-				AffineTransform scaleTransform = AffineTransform.getScaleInstance(scaleX, scaleY);
-			    AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
-			    SwipeControlPanel.binaryImage = bilinearScaleOp.filter(binaryImg, new BufferedImage(resBINARY.width, resBINARY.height, BufferedImage.TYPE_BYTE_BINARY));
-				
-			    SwipeConsole.backPanel.repaint();
-			}
-	    }catch(Exception e){
-	    	SwipeConsole.pop(e.getMessage());
-	    }finally{
-	    	cam.close();
-	    }	
+		return newImg;				
 	}
-		
+			
 	public static boolean[][] getBinary(BufferedImage img, Dimension resolution){
 		boolean[][] binaryImg = new boolean[resolution.width][resolution.height];
 		int pixData;

@@ -1,24 +1,16 @@
 package Swipe;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.ColorUIResource;
 
 public class SwipeConsole extends JFrame{
-	// Main 400, 300
-	// viewport 200, 150
-	
+
 	static SwipeConsole handler;
 	static SwipeControlPanel backPanel;
 	static BinaryViewport smallWindow;
@@ -56,8 +48,13 @@ public class SwipeConsole extends JFrame{
 	protected void finalize() throws Throwable {
 		super.finalize();
 		Processor.camFeed = false;
-		Processor.viewportActive = false;
-		
+		GridMapper.active = false;
+	}
+	
+	public static void restore(){
+		smallWindow.dispose();
+		handler.setVisible(true);
+		backPanel.startCam();
 	}
 	
 	public static void pop(String s){

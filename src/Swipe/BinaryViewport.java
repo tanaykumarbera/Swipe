@@ -74,7 +74,7 @@ public class BinaryViewport extends JWindow{
 		this.setContentPane(back);
 		
 		bar = new JPanel(); sleekBar = new JPanel();
-//		bar.setVisible(false); sleekBar.setVisible(false);
+		bar.setVisible(false); sleekBar.setVisible(false);
 		bar.setPreferredSize(new Dimension(200, 30));
 		sleekBar.setPreferredSize(new Dimension(200, 2));
 		bar.setBackground(Color.RED);
@@ -103,8 +103,10 @@ public class BinaryViewport extends JWindow{
 		
 		console.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				// Return back to Console. Stop Ongoing operations
-				System.out.print("worki");
+				// Stop Ongoing operations & Return back to Console.
+				GridMapper.active = false;
+				Photographer.battery = false;
+				SwipeConsole.restore();
 			}          
 		});
 		
@@ -120,6 +122,7 @@ public class BinaryViewport extends JWindow{
             public void mouseExited(MouseEvent e){
             	Point p = e.getPoint();
             	if(p.x < 0 || p.y < 0 || p.x > 200 || p.y > 150){
+            		// In case it is actually out of this area, and not due to button
             		bar.setVisible(false);
                 	sleekBar.setVisible(false);
             	}

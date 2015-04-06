@@ -1,14 +1,14 @@
 package Swipe;
+import java.awt.Dimension;
 import java.util.List;
-import java.util.Scanner;
-
 import javax.swing.DefaultComboBoxModel;
-
 import com.github.sarxos.webcam.Webcam;
 
 public class Camera{
 	static List avaiableCams;
 	static Webcam webcam;
+	static boolean camOpen;
+	static Dimension swipeDefault = new Dimension(640, 480);
 	
 	public static DefaultComboBoxModel enquireCams(){
 		DefaultComboBoxModel cams = null;
@@ -36,5 +36,20 @@ public class Camera{
 	
 	public static Webcam getChoosenCam(){
 		return (Webcam) avaiableCams.get(SwipeControlPanel.camMenu.getSelectedIndex());
+	}
+	
+	public static Webcam getOpenCam(){
+		if(!camOpen){
+			webcam = getChoosenCam();
+			webcam.setViewSize(swipeDefault);
+			webcam.open();
+			camOpen = true;
+		}
+		return webcam;
+	}
+	
+	public static void dispose(){
+		if(camOpen)
+			webcam.close();
 	}
 }

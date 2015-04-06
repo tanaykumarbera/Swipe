@@ -27,6 +27,8 @@ public class SwipeControlPanel extends JPanel{
 	static Insets insets;
 	static Dimension frame_size;
 	static Font sFont;
+	static ScreenFeeder feeder;
+	
 	SliderPanel sliderPanel;
 	ControlPanel controlPanel;
 	
@@ -138,7 +140,9 @@ public class SwipeControlPanel extends JPanel{
 		    
 			camMenu.addActionListener(new ActionListener () {
 			    public void actionPerformed(ActionEvent e) {
-			    	Processor.feedCam(camMenu.getSelectedIndex());
+			    	// on change action perform
+			    	ScreenFeeder.camFeed = false;
+			    	startCam();
 			    }
 			});
 			
@@ -191,6 +195,7 @@ public class SwipeControlPanel extends JPanel{
     }
 
 	public void startCam(){
-		Processor.feedCam(camMenu.getSelectedIndex()); 
+		 feeder = new ScreenFeeder();
+		 feeder.start();
 	}
 }
