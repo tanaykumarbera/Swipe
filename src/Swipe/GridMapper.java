@@ -97,7 +97,9 @@ public class GridMapper extends Thread {
 					}
 				}
 			}
-			BinaryViewport.refresh(meanx, meany, grid);
+			
+			BinaryViewport.refresh(meanx, meany, grid, Events.trigger(grid));
+			
 		}
 	}
 }

@@ -26,10 +26,10 @@ import javax.swing.JWindow;
 public class BinaryViewport extends JWindow{
 	static Dimension resolution;
 	static int BLACK = Color.BLACK.getRGB(), WHITE = Color.WHITE.getRGB();
-	static int grid = 0, xpos, ypos;
+	static int grid = 0, xpos, ypos, alpha;
 	static int mean_x, mean_y, radius, Dradius;
 	static Color hard = new Color(255, 255, 255, 255);
-	static Color light = new Color(255, 255, 255, 80);
+	static Color light;
 	static JPanel back;
 	static BufferedImage rawIMAGE;
 	static JPanel bar, sleekBar;
@@ -64,6 +64,8 @@ public class BinaryViewport extends JWindow{
 						case 9: X = 133; Y = 100; break;//return "BOTTOM LEFT";
 						default: X = 0; Y = 0;
 					}
+		    		
+		    		light = new Color(255, 255, 255, alpha);
 					g.setColor(light);
 					g.fillRect(X, Y, 67, 50);
 		        }
@@ -150,9 +152,10 @@ public class BinaryViewport extends JWindow{
 		setVisible(true);
 	}
 	
-	public static void refresh(int x, int y, int g){
+	public static void refresh(int x, int y, int g, int a){
 		mean_x = (int)(x / 3.2); mean_y = (int)(y / 2.8);
 		grid = g;
+		alpha = a;
 		back.repaint();
 	}
 	
