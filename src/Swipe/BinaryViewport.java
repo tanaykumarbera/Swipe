@@ -24,6 +24,8 @@ import javax.swing.JPanel;
 import javax.swing.JWindow;
 
 public class BinaryViewport extends JWindow{
+	
+	private static final long serialVersionUID = 5L;
 	static Dimension resolution;
 	static int BLACK = Color.BLACK.getRGB(), WHITE = Color.WHITE.getRGB();
 	static int grid = 0, xpos, ypos, alpha;
@@ -42,6 +44,8 @@ public class BinaryViewport extends JWindow{
 		Dradius = radius * 2;
 	
 		back = new JPanel(){
+			
+			private static final long serialVersionUID = 505L;
 			protected void paintComponent(Graphics g) {
 		        super.paintComponent(g);
 		        int X, Y;
@@ -166,9 +170,5 @@ public class BinaryViewport extends JWindow{
 		
 		p.start();
 		g.start();
-	}
-	
-	public static void main(String s[]){
-		new BinaryViewport();
 	}
 }

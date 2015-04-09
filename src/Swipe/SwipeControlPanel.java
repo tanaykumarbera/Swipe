@@ -17,9 +17,11 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 public class SwipeControlPanel extends JPanel{
-	
+
+	private static final long serialVersionUID = 2L;
 	static BufferedImage rawImage, binaryImage;
 	static JLabel rgbVal;
 	static JComboBox camMenu;
@@ -32,7 +34,7 @@ public class SwipeControlPanel extends JPanel{
 	SliderPanel sliderPanel;
 	ControlPanel controlPanel;
 	
-	int DIFF = 50;
+	int DIFF = 25;
 	
 	public SwipeControlPanel(){
 		this.setLayout(null);
@@ -41,6 +43,83 @@ public class SwipeControlPanel extends JPanel{
 		this.setPreferredSize(frame_size);
 		this.setBackground(Color.WHITE);
 		
+		/* Create a dropdown for available cameras. */
+		DefaultComboBoxModel cams = Camera.enquireCams();
+		if(cams != null){
+			
+			/* Has a camera and other alternatives */
+			
+			buildBackPanel(); // build up the components for back-panel
+			
+			/* Add available Cams to drop down */
+			camMenu = new JComboBox(cams);
+			camScrollPane = new JScrollPane(camMenu);
+			camScrollPane.setLocation(100, 100);
+			Dimension camScrollPaneSize = new Dimension(320, 30);
+			
+			camScrollPane.setPreferredSize(camScrollPaneSize);
+			camMenu.setBackground(Color.WHITE);
+			camMenu.setForeground(Color.DARK_GRAY);
+			sFont = new Font("monospace", Font.BOLD, 12);
+			camMenu.setFont(sFont);
+			
+			camMenu.setSelectedIndex(cams.getSize() - 1); // sets the last camera in the list as default selection.
+			this.add(camScrollPane);
+			camScrollPane.setBounds(10 + insets.left, 10 + insets.top, camScrollPaneSize.width, camScrollPaneSize.height);
+		    
+			camMenu.addActionListener(new ActionListener () {
+			    public void actionPerformed(ActionEvent e) {
+			    	// on change action perform
+			    	ScreenFeeder.camFeed = false;
+			    	Camera.camOpen = false;
+			    	startCam();
+			    }
+			});
+			
+			Dimension sp_size = new Dimension(480, 120);
+			sliderPanel = new SliderPanel(sp_size);
+			this.add(sliderPanel);
+			sliderPanel.setBounds(340 + insets.left, 10 + insets.top, sp_size.width, sp_size.height);
+			
+			Dimension cp_size = new Dimension(270, 158);
+			controlPanel = new ControlPanel(cp_size);
+			this.add(controlPanel);
+			controlPanel.setBounds(550 + insets.left, 135 + insets.top, cp_size.width, cp_size.height);
+			
+		}else{
+			/* No Camera found	*/
+			
+			/* Add a panel to overlay current wrapper. */
+			JPanel cover = new JPanel();
+			cover.setLayout(null);
+			cover.setBackground(Color.WHITE);
+			cover.setPreferredSize(frame_size);
+			this.add(cover);
+			cover.setBounds(insets.left,insets.top, frame_size.width, frame_size.height);
+			
+			/* Add Error msg and similie to the panel. */
+			JLabel similie = new JLabel(":(", SwingConstants.CENTER);
+			sFont = new Font("monospace", Font.BOLD, 100);
+			similie.setFont(sFont);
+			similie.setForeground(Color.GRAY);
+			similie.setPreferredSize(frame_size);
+			cover.add(similie);
+			similie.setBounds(insets.left, insets.top - 25, frame_size.width, frame_size.height);
+			
+			JLabel alertTxt = new JLabel("Looks like something went haywired!  Error: No cams detected.", SwingConstants.CENTER);
+			sFont = new Font("monospace", Font.BOLD, 12);
+			alertTxt.setFont(sFont);
+			alertTxt.setForeground(Color.GRAY);
+			alertTxt.setPreferredSize(frame_size);
+			cover.add(alertTxt);
+			alertTxt.setBounds(insets.left, insets.top + 100, frame_size.width, frame_size.height);
+		}
+
+		this.setVisible(true);
+	}
+	
+
+	public void buildBackPanel(){
 		/* Creates a default background for the area streaming video */
 		int ImgBack = Color.LIGHT_GRAY.getRGB();
 		rawImage = new BufferedImage(320, 240, BufferedImage.TYPE_BYTE_GRAY);
@@ -53,7 +132,7 @@ public class SwipeControlPanel extends JPanel{
 		transparentLayer.setPreferredSize(new Dimension(320, 240));
 		transparentLayer.setBackground(new Color(120, 120, 120, 0));
 		
-		rgbVal = new JLabel("RGB [120, 120, 120]", JLabel.CENTER);
+		rgbVal = new JLabel("RGB [120, 120, 120]", SwingConstants.CENTER);
 		rgbVal.setPreferredSize(new Dimension(130, 25));
 		rgbVal.setOpaque(true);
 		rgbVal.setBackground(Color.BLACK);
@@ -117,75 +196,6 @@ public class SwipeControlPanel extends JPanel{
 		for(int j = 0; j < 150; j++)
 			for(int i = 0; i < 200; i++)
 				binaryImage.setRGB(i, j, ImgBack);
-		
-		/* Create a dropdown for available cameras. */
-		DefaultComboBoxModel cams = Camera.enquireCams();
-		if(cams != null){
-			
-			/* Has a camera and other alternatives */
-			camMenu = new JComboBox(cams);
-			camScrollPane = new JScrollPane(camMenu);
-			camScrollPane.setLocation(100, 100);
-			Dimension camScrollPaneSize = new Dimension(320, 30);
-			
-			camScrollPane.setPreferredSize(camScrollPaneSize);
-			camMenu.setBackground(Color.WHITE);
-			camMenu.setForeground(Color.DARK_GRAY);
-			sFont = new Font("monospace", Font.BOLD, 12);
-			camMenu.setFont(sFont);
-			
-			camMenu.setSelectedIndex(cams.getSize() - 1); // sets the last camera in the list as default selection.
-			this.add(camScrollPane);
-			camScrollPane.setBounds(10 + insets.left, 10 + insets.top, camScrollPaneSize.width, camScrollPaneSize.height);
-		    
-			camMenu.addActionListener(new ActionListener () {
-			    public void actionPerformed(ActionEvent e) {
-			    	// on change action perform
-			    	ScreenFeeder.camFeed = false;
-			    	startCam();
-			    }
-			});
-			
-			Dimension sp_size = new Dimension(480, 120);
-			sliderPanel = new SliderPanel(sp_size);
-			this.add(sliderPanel);
-			sliderPanel.setBounds(340 + insets.left, 10 + insets.top, sp_size.width, sp_size.height);
-			
-			Dimension cp_size = new Dimension(270, 158);
-			controlPanel = new ControlPanel(cp_size);
-			this.add(controlPanel);
-			controlPanel.setBounds(550 + insets.left, 135 + insets.top, cp_size.width, cp_size.height);
-			
-		}else{
-			/* No Camera found	*/
-			
-			/* Add a panel to overlay current wrapper. */
-			JPanel cover = new JPanel();
-			cover.setLayout(null);
-			cover.setBackground(Color.WHITE);
-			cover.setPreferredSize(frame_size);
-			this.add(cover);
-			cover.setBounds(insets.left,insets.top, frame_size.width, frame_size.height);
-			
-			/* Add Error msg and similie to the panel. */
-			JLabel similie = new JLabel(":(", JLabel.CENTER);
-			sFont = new Font("monospace", Font.BOLD, 100);
-			similie.setFont(sFont);
-			similie.setForeground(Color.GRAY);
-			similie.setPreferredSize(frame_size);
-			cover.add(similie);
-			similie.setBounds(insets.left, insets.top - 25, frame_size.width, frame_size.height);
-			
-			JLabel alertTxt = new JLabel("Looks like something went haywired!  Error: No cams detected.", JLabel.CENTER);
-			sFont = new Font("monospace", Font.BOLD, 12);
-			alertTxt.setFont(sFont);
-			alertTxt.setForeground(Color.GRAY);
-			alertTxt.setPreferredSize(frame_size);
-			cover.add(alertTxt);
-			alertTxt.setBounds(insets.left, insets.top + 100, frame_size.width, frame_size.height);
-		}
-
-		this.setVisible(true);
 	}
 	
 	protected void paintComponent(Graphics g) {

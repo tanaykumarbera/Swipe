@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/webcam-capture-0.3.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/libs-for-webcam-capture/bridj-0.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/libs-for-webcam-capture/slf4j-api-1.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/libs-for-webcam-capture/slf4j-simple-1.6.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/jna-3.5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/platform-3.5.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/slf4j-api-1.7.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/vlcj-3.5.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/vlcj-3.5.0-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/vlcj-3.5.0-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/vlcj-3.5.0-tests.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Tanay/Documents/FProj/workspace/Swipe/external/vlcj/vlcj-3.5.0-test-sources.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tanay/Documents/FProj/w2/Swipe/external/webcam-capture-0.3.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tanay/Documents/FProj/w2/Swipe/external/libs-for-webcam-capture/bridj-0.6.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tanay/Documents/FProj/w2/Swipe/external/libs-for-webcam-capture/slf4j-api-1.7.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tanay/Documents/FProj/w2/Swipe/external/libs-for-webcam-capture/slf4j-simple-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

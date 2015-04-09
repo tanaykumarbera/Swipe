@@ -1,8 +1,5 @@
 package slider;
 
-import java.awt.Color;
-import java.awt.Dimension;
-
 import javax.swing.JSlider;
 
 /**
@@ -16,7 +13,9 @@ import javax.swing.JSlider;
  */
 public class RangeSlider extends JSlider {
 
-    /**
+	private static final long serialVersionUID = 8L;
+
+	/**
      * Constructs a RangeSlider with default minimum and maximum values of 0
      * and 100.
      */

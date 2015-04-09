@@ -45,7 +45,7 @@ public class GridMapper extends Thread {
 					}
 				}
 				
-				meanx = (countx == 0)? -1 : (int) meanx / countx;
+				meanx = (countx == 0)? -1 : meanx / countx;
 			}
 			
 			{
@@ -68,7 +68,7 @@ public class GridMapper extends Thread {
 					}
 				}
 			
-				meany = (county == 0) ? -1 : (int)meany/county;
+				meany = (county == 0) ? -1 : meany/county;
 			}
 			
 			{

@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
@@ -21,7 +22,8 @@ import javax.swing.event.ChangeListener;
  */
 public class RangeSliderDemo extends JPanel {
 
-    private JLabel rangeSliderLabel1 = new JLabel();
+	private static final long serialVersionUID = 9L;
+	private JLabel rangeSliderLabel1 = new JLabel();
     private JLabel rangeSliderValue1 = new JLabel();
     private JLabel rangeSliderLabel2 = new JLabel();
     private JLabel rangeSliderValue2 = new JLabel();
@@ -34,8 +36,8 @@ public class RangeSliderDemo extends JPanel {
         
         rangeSliderLabel1.setText("Lower value:");
         rangeSliderLabel2.setText("Upper value:");
-        rangeSliderValue1.setHorizontalAlignment(JLabel.LEFT);
-        rangeSliderValue2.setHorizontalAlignment(JLabel.LEFT);
+        rangeSliderValue1.setHorizontalAlignment(SwingConstants.LEFT);
+        rangeSliderValue2.setHorizontalAlignment(SwingConstants.LEFT);
         
         rangeSlider.setPreferredSize(new Dimension(320, rangeSlider.getPreferredSize().height));
         rangeSlider.setMinimum(0);

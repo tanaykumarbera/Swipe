@@ -15,10 +15,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 public class ControlPanel extends JPanel{
+	
+	private static final long serialVersionUID = 4L;
 	Dimension frame_size;
 	Insets insets;
 	
@@ -48,7 +51,6 @@ public class ControlPanel extends JPanel{
 		URL iconURL = getClass().getResource("/images/controlImage.PNG");
 		ImageIcon icon = new ImageIcon(iconURL);
 		controlImage = icon.getImage();
-		
 		
 		// The transparent grids over the image to show tooltiptext over operations		
 		Dimension grid_dimenssion = new Dimension(33, 24);
@@ -128,7 +130,7 @@ public class ControlPanel extends JPanel{
 		menu.setBounds(219 + insets.left, 67 + insets.top, grid_dimenssion.width, grid_dimenssion.height);
 		
 		// Adds checkbox for some extra customization
-		ImageIcon checkTRUE = new ImageIcon(getClass().getResource("/images/checkTRUE.png"));
+		ImageIcon checkTRUE = new ImageIcon(getClass().getResource("/images/checkTRUE.PNG"));
 		ImageIcon checkFALSE = new ImageIcon(getClass().getResource("/images/checkFALSE.png"));
 		
 		reverse = new JCheckBox("Invert Horizontal Axis");
@@ -153,7 +155,7 @@ public class ControlPanel extends JPanel{
 		center = new JCheckBox("Disable grid in center");
 		center.setFont(bold10);
 		center.setOpaque(false);
-		center.setSelected(false);
+		center.setSelected(true);
 		center.setIcon(checkFALSE);
 		center.setSelectedIcon(checkTRUE);
 		this.add(center);

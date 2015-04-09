@@ -11,6 +11,7 @@ import javax.swing.plaf.ColorUIResource;
 
 public class SwipeConsole extends JFrame{
 
+	private static final long serialVersionUID = 1L;
 	static SwipeConsole handler;
 	static SwipeControlPanel backPanel;
 	static BinaryViewport smallWindow;

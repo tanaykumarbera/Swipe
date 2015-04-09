@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 public class BlueRangeSlider extends RangeSlider {
+	
+	private static final long serialVersionUID = 6L;
+
 	public BlueRangeSlider(int min, int max, int initialMIN, int initialMAX, Dimension size) {
 		super(min, max);
 		//initSlider();

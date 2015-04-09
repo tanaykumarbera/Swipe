@@ -40,6 +40,9 @@ public class Camera{
 	
 	public static Webcam getOpenCam(){
 		if(!camOpen){
+			if(webcam != null)
+				webcam.close();
+			
 			webcam = getChoosenCam();
 			webcam.setViewSize(swipeDefault);
 			webcam.open();

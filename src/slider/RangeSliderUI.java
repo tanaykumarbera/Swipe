@@ -12,6 +12,7 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.JComponent;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -124,7 +125,7 @@ class RangeSliderUI extends BasicSliderUI {
         
         // Calculate upper thumb location.  The thumb is centered over its 
         // value on the track.
-        if (slider.getOrientation() == JSlider.HORIZONTAL) {
+        if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
             int upperPosition = xPositionForValue(slider.getValue() + slider.getExtent());
             upperThumbRect.x = upperPosition - (upperThumbRect.width / 2);
             upperThumbRect.y = trackRect.y;
@@ -183,7 +184,7 @@ class RangeSliderUI extends BasicSliderUI {
         
         Rectangle trackBounds = trackRect;
         
-        if (slider.getOrientation() == JSlider.HORIZONTAL) {
+        if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
             // Determine position of selected range by moving from the middle
             // of one thumb to the other.
             int lowerX = thumbRect.x + (thumbRect.width / 2);
@@ -417,10 +418,10 @@ class RangeSliderUI extends BasicSliderUI {
             // Handle lower thumb pressed.
             if (lowerPressed) {
                 switch (slider.getOrientation()) {
-                case JSlider.VERTICAL:
+                case SwingConstants.VERTICAL:
                     offset = currentMouseY - thumbRect.y;
                     break;
-                case JSlider.HORIZONTAL:
+                case SwingConstants.HORIZONTAL:
                     offset = currentMouseX - thumbRect.x;
                     break;
                 }
@@ -433,10 +434,10 @@ class RangeSliderUI extends BasicSliderUI {
             // Handle upper thumb pressed.
             if (upperPressed) {
                 switch (slider.getOrientation()) {
-                case JSlider.VERTICAL:
+                case SwingConstants.VERTICAL:
                     offset = currentMouseY - upperThumbRect.y;
                     break;
-                case JSlider.HORIZONTAL:
+                case SwingConstants.HORIZONTAL:
                     offset = currentMouseX - upperThumbRect.x;
                     break;
                 }
@@ -487,7 +488,7 @@ class RangeSliderUI extends BasicSliderUI {
             int thumbMiddle = 0;
             
             switch (slider.getOrientation()) {
-            case JSlider.VERTICAL:      
+            case SwingConstants.VERTICAL:      
                 int halfThumbHeight = thumbRect.height / 2;
                 int thumbTop = currentMouseY - offset;
                 int trackTop = trackRect.y;
@@ -510,7 +511,7 @@ class RangeSliderUI extends BasicSliderUI {
                 slider.setValue(valueForYPosition(thumbMiddle));
                 break;
                 
-            case JSlider.HORIZONTAL:
+            case SwingConstants.HORIZONTAL:
                 int halfThumbWidth = thumbRect.width / 2;
                 int thumbLeft = currentMouseX - offset;
                 int trackLeft = trackRect.x;
@@ -546,7 +547,7 @@ class RangeSliderUI extends BasicSliderUI {
             int thumbMiddle = 0;
             
             switch (slider.getOrientation()) {
-            case JSlider.VERTICAL:      
+            case SwingConstants.VERTICAL:      
                 int halfThumbHeight = thumbRect.height / 2;
                 int thumbTop = currentMouseY - offset;
                 int trackTop = trackRect.y;
@@ -569,7 +570,7 @@ class RangeSliderUI extends BasicSliderUI {
                 slider.setExtent(valueForYPosition(thumbMiddle) - slider.getValue());
                 break;
                 
-            case JSlider.HORIZONTAL:
+            case SwingConstants.HORIZONTAL:
                 int halfThumbWidth = thumbRect.width / 2;
                 int thumbLeft = currentMouseX - offset;
                 int trackLeft = trackRect.x;

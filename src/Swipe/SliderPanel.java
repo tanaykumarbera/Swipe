@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -17,6 +18,8 @@ import slider.RangeSlider;
 import slider.RedRangeSlider;
 
 public class SliderPanel extends JPanel{
+	
+	private static final long serialVersionUID = 3L;
 	Dimension frame_size;
 	RangeSlider Red, Green, Blue;
 	JLabel redLabel, blueLabel, greenLabel, redRange, blueRange, greenRange;
@@ -39,7 +42,7 @@ public class SliderPanel extends JPanel{
 		title.setTitleFont(bold10);
 		this.setBorder(title);
 		
-		redLabel = new JLabel("[000] RED", JLabel.LEFT); redLabel.setFont(bold10); redLabel.setPreferredSize(colorLabel);
+		redLabel = new JLabel("[000] RED", SwingConstants.LEFT); redLabel.setFont(bold10); redLabel.setPreferredSize(colorLabel);
 		Red = new RedRangeSlider(0, 255, Processor.MIN_RED, Processor.MAX_RED, colorSlider);
 		redRange = new JLabel(); updateRED(Processor.MIN_RED, Processor.MAX_RED); redRange.setFont(bold10);
 		
