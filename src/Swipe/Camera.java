@@ -12,6 +12,7 @@ public class Camera{
 	
 	public static DefaultComboBoxModel enquireCams(){
 		DefaultComboBoxModel cams = null;
+		String camName; int camNameLength = 25;
 		
 		/* Checks even if a camera exists or not! */ 
 		webcam = Webcam.getDefault();
@@ -19,10 +20,15 @@ public class Camera{
 		
 		avaiableCams = Webcam.getWebcams();
 		cams = new DefaultComboBoxModel();
-		cams.addElement(webcam.getName());
+		camName = webcam.getName();
+		if(camName.length() > camNameLength) camName = camName.substring(0, camNameLength);
+		cams.addElement(camName);
+		
 		if(avaiableCams.size() > 1){
 			for(int i = 1; i < avaiableCams.size(); i++){
-				cams.addElement(((Webcam)avaiableCams.get(i)).getName());
+				camName = ((Webcam)avaiableCams.get(i)).getName();
+				if(camName.length() > camNameLength) camName = camName.substring(0, camNameLength);
+				cams.addElement(camName);
 			}
 		}
 		return cams;

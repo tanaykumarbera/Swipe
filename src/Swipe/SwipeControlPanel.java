@@ -39,7 +39,7 @@ public class SwipeControlPanel extends JPanel{
 	public SwipeControlPanel(){
 		this.setLayout(null);
 		insets = this.getInsets();
-		frame_size = new Dimension(820, 290);
+		frame_size = new Dimension(830, 300);
 		this.setPreferredSize(frame_size);
 		this.setBackground(Color.WHITE);
 		

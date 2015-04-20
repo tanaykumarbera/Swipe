@@ -26,10 +26,10 @@ public class SwipeConsole extends JFrame{
 		ImageIcon icon = new ImageIcon(iconURL);
 		setIconImage(icon.getImage());
 		
+		setResizable(false);
 		pack();
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
 		setVisible(true);
 		
 		// Set up look & feel for tooltip text
