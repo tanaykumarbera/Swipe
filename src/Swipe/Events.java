@@ -16,14 +16,14 @@ public class Events {
 			BOTTOM_RIGHT = 9,
 			NONE = 0;
 	
-	public static final int stTHRESHOLD = 5;
+	public static final int stTHRESHOLD = 3;
 	
 	public static Robot mouse;
 	
 	public static int c = 0, c1 = 1, c3 = 0, c5 = 0, c7 = 0, c9 = 0;
 	
 	public static int last_alpha = 0;
-	public static long trigger_threshold = 250, last_triggered = 0;
+	public static long trigger_threshold = 750, last_triggered = 0;
 	
 	public static int trigger(int option){
 		
